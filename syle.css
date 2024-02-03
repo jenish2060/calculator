@@ -1,0 +1,70 @@
+body {
+  font-family: monospace;
+}
+
+.container,
+.display,
+button {
+  border-radius: 10px;
+  border: 2px solid black;
+}
+
+.container {
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  max-height: 500px;
+  background-color: #c7c8cc;
+  padding: 20px;
+}
+
+.display {
+  background-color: white;
+  min-height: 100px;
+  margin-bottom: 15px;
+}
+
+.last-operation,
+.current-operation {
+  text-align: end;
+  margin: 15px 20px;
+}
+
+.last-operation {
+  font-size: 20px;
+}
+
+.current-operation {
+  font-size: 40px;
+}
+
+button {
+  font-size: 20px;
+  padding: 15px;
+  margin-bottom: 10px;
+  width: calc(100% / 4.25);
+}
+
+#clear,
+#delete {
+  padding: 20px 30px;
+  width: calc(100% / 2.05);
+  margin-bottom: 10px;
+}
+
+#clear {
+  background-color: lightblue;
+}
+
+#delete {
+  background-color: lightcoral;
+}
+
+.button {
+  display: flex;
+}
+
+button:hover {
+  background-color: lightgray;
+}
