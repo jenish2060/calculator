@@ -13,7 +13,7 @@ button {
   margin: 50px auto;
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  max-width: 350px;
   max-height: 500px;
   background-color: #c7c8cc;
   padding: 20px;
@@ -21,14 +21,13 @@ button {
 
 .display {
   background-color: white;
-  min-height: 100px;
   margin-bottom: 15px;
 }
 
 .last-operation,
 .current-operation {
   text-align: end;
-  margin: 15px 20px;
+  margin: 10px 20px;
 }
 
 .last-operation {
@@ -39,32 +38,40 @@ button {
   font-size: 40px;
 }
 
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 button {
+  flex: 1;
   font-size: 20px;
-  padding: 15px;
-  margin-bottom: 10px;
-  width: calc(100% / 4.25);
+  padding: 20px 25px;
+}
+
+button:hover {
+  background-color: lightgray;
 }
 
 #clear,
 #delete {
+  flex: 2;
   padding: 20px 30px;
-  width: calc(100% / 2.05);
-  margin-bottom: 10px;
 }
 
 #clear {
   background-color: lightblue;
 }
 
+#clear:hover {
+  background-color: rgb(142, 201, 221);
+}
+
 #delete {
   background-color: lightcoral;
 }
 
-.button {
-  display: flex;
-}
-
-button:hover {
-  background-color: lightgray;
+#delete:hover {
+  background-color: rgb(240, 104, 104);
 }
