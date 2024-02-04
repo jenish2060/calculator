@@ -22,11 +22,13 @@ button {
 .display {
   background-color: white;
   margin-bottom: 15px;
+  text-align: end;
+  min-height: 90px;
 }
 
 .last-operation {
   font-size: 20px;
-  min-height: 40x;
+  min-height: 20px;
 }
 
 .current-operation {
@@ -36,7 +38,6 @@ button {
 
 .last-operation,
 .current-operation {
-  text-align: end;
   margin: 10px 20px;
 }
 
