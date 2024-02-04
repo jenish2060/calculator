@@ -27,18 +27,18 @@ button {
 }
 
 .last-operation {
-  font-size: 20px;
-  min-height: 20px;
+  font-size: 18px;
+  min-height: 25px;
 }
 
 .current-operation {
-  font-size: 40px;
+  font-size: 35px;
   min-height: 40px;
 }
 
 .last-operation,
 .current-operation {
-  margin: 10px 20px;
+  margin: 10px 15px;
 }
 
 .buttons {
@@ -57,24 +57,32 @@ button:hover {
   background-color: lightgray;
 }
 
-#clear,
-#delete {
+.clear,
+.delete {
   flex: 2;
   padding: 20px 30px;
 }
 
-#clear {
+.clear {
   background-color: lightblue;
 }
 
-#clear:hover {
+.clear:hover {
   background-color: rgb(142, 201, 221);
 }
 
-#delete {
+.delete {
   background-color: lightcoral;
 }
 
-#delete:hover {
+.delete:hover {
   background-color: rgb(240, 104, 104);
+}
+
+.equals-to {
+  background-color: lightgreen;
+}
+
+.equals-to:hover {
+  background-color: rgb(116, 234, 116);
 }
