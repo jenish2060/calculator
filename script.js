@@ -2,45 +2,10 @@ const lastOperation = document.querySelector(".last-operation");
 const currentOperation = document.querySelector(".current-operation");
 const buttonLayout = document.querySelector(".buttons");
 
-let firstValue = null;
+let firstValue = 0;
 let secondValue = null;
 let operator = null;
-
-buttonLayout.addEventListener("click", (e) => {
-  let currentValue = e.target.value;
-  if (currentValue === "clear") {
-    clear();
-  } else if (currentValue === "delete") {
-    deleteLastOperand;
-  } else if (currentValue === "result") {
-    firstValue = 5;
-    secondValue = 10;
-    operator = "+";
-    if (firstValue != null && secondValue != null) {
-      result();
-    }
-  } else if (typeof parseInt(currentValue) === "number") {
-    handleOperand(parseInt(currentValue));
-  } else {
-    operator = currentValue;
-  }
-});
-
-function clear() {
-  lastOperation.textContent = "";
-  currentOperation.textContent = "0";
-  firstValue = null;
-  secondValue = null;
-  operator = null;
-}
-
-function result() {
-  firstValue = operate(firstValue, secondValue, operator);
-  secondValue = null;
-  operator = null;
-  currentOperation.textContent = "";
-  currentOperation.textContent = `${firstValue}`;
-}
+let operatorUsedOnce = false;
 
 const sum = (firstValue, secondValue) => {
   return firstValue + secondValue;
@@ -75,4 +40,76 @@ function operate(firstValue, secondValue, operator) {
     case "÷":
       return divide(firstValue, secondValue);
   }
+}
+
+function checkOperator(value) {
+  switch (value) {
+    case "+":
+      return true;
+    case "-":
+      return true;
+    case "x":
+      return true;
+    case "÷":
+      return true;
+  }
+  return false;
+}
+
+buttonLayout.addEventListener("click", (e) => {
+  let currentValue = e.target.value;
+  if (currentValue === "clear") {
+    clear();
+  } else if (currentValue === "delete") {
+    deleteLastOperand;
+  } else if (currentValue === "result") {
+    if (firstValue != null && secondValue != null && operator != null) {
+      result();
+    }
+  } else if (checkOperator(currentValue)) {
+    handleOperator(currentValue);
+    console.log(currentValue);
+  } else {
+    handleOperand(parseInt(currentValue));
+  }
+});
+
+function clear() {
+  lastOperation.textContent = "";
+  currentOperation.textContent = "0";
+  firstValue = null;
+  secondValue = null;
+  operator = null;
+}
+
+function handleOperand(value) {
+  if (firstValue === null || firstValue === 0) {
+    currentOperation.textContent = "";
+  }
+  if (firstValue === null || firstValue === 0 || operator === null) {
+    firstValue = value;
+    currentOperation.append(`${firstValue}`);
+  } else {
+    secondValue = value;
+    currentOperation.append(`${secondValue}`);
+  }
+}
+
+function handleOperator(value) {
+  if (operatorUsedOnce) {
+    result();
+  }
+  operator = value;
+  lastOperation.append(` ${firstValue}`);
+  currentOperation.textContent = `${operator}`;
+  operatorUsedOnce = true;
+}
+
+function result() {
+  firstValue = operate(firstValue, secondValue, operator);
+  secondValue = null;
+  operator = null;
+  operatorUsedOnce = false;
+  currentOperation.textContent = "";
+  currentOperation.textContent = `${firstValue}`;
 }
