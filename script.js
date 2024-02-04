@@ -77,9 +77,10 @@ buttonLayout.addEventListener("click", (e) => {
 function clear() {
   lastOperation.textContent = "";
   currentOperation.textContent = "0";
-  firstValue = null;
+  firstValue = 0;
   secondValue = null;
   operator = null;
+  operatorUsedOnce = false;
 }
 
 function handleOperand(value) {
@@ -88,28 +89,35 @@ function handleOperand(value) {
   }
   if (firstValue === null || firstValue === 0 || operator === null) {
     firstValue = value;
-    currentOperation.append(`${firstValue}`);
+    currentOperation.textContent = `${firstValue}`;
   } else {
     secondValue = value;
-    currentOperation.append(`${secondValue}`);
+    lastOperation.append(` ${operator}`);
+    currentOperation.textContent = `${secondValue}`;
   }
 }
 
 function handleOperator(value) {
+  lastOperation.textContent = "";
   if (operatorUsedOnce) {
     result();
+    lastOperation.textContent = "";
   }
   operator = value;
   lastOperation.append(` ${firstValue}`);
-  currentOperation.textContent = `${operator}`;
+  currentOperation.textContent = ` ${operator}`;
   operatorUsedOnce = true;
 }
 
 function result() {
   firstValue = operate(firstValue, secondValue, operator);
+  if (!Number.isInteger(firstValue)) {
+    firstValue = firstValue.toFixed(3);
+  }
+  lastOperation.append(` ${secondValue} =`);
   secondValue = null;
   operator = null;
   operatorUsedOnce = false;
   currentOperation.textContent = "";
-  currentOperation.textContent = `${firstValue}`;
+  lastOperation.textContent = `${firstValue}`;
 }
