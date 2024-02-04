@@ -24,24 +24,26 @@ button {
   margin-bottom: 15px;
 }
 
+.last-operation {
+  font-size: 20px;
+  min-height: 40x;
+}
+
+.current-operation {
+  font-size: 40px;
+  min-height: 40px;
+}
+
 .last-operation,
 .current-operation {
   text-align: end;
   margin: 10px 20px;
 }
 
-.last-operation {
-  font-size: 20px;
-}
-
-.current-operation {
-  font-size: 40px;
-}
-
 .buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
 }
 
 button {
