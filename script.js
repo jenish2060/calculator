@@ -20,8 +20,10 @@ const multiply = (firstValue, secondValue) => {
 };
 
 const divide = (firstValue, secondValue) => {
-  if (secondValue === 0) {
-    return `ERROR`;
+  if (secondValue == 0) {
+    currentOperation.textContent = `error`;
+    setTimeout(clear, 1000);
+    return;
   } else {
     return firstValue / secondValue;
   }
@@ -98,7 +100,13 @@ function handleOperand(value) {
     }
     currentOperation.textContent = `${firstValue}`;
   } else {
-    secondValue = secondValue + value;
+    if (value === ".") {
+      if (!secondValue.includes(".")) {
+        secondValue = secondValue + value;
+      }
+    } else {
+      secondValue = secondValue + value;
+    }
     currentOperation.textContent = `${secondValue}`;
   }
 }
