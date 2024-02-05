@@ -104,21 +104,24 @@ function handleOperand(value) {
 }
 
 function handleOperator(value) {
-  if (operatorUsedOnce) {
+  if (secondValue == "") {
+    updateOperation(value);
+  } else if (operatorUsedOnce) {
     if (secondValue != "") {
       result();
-      lastOperation.textContent = "";
-      operator = value;
-      lastOperation.append(`${firstValue} `);
-      lastOperation.append(`${operator} `);
+      updateOperation(value);
     }
   } else {
-    lastOperation.textContent = "";
-    operator = value;
-    lastOperation.append(`${firstValue} `);
-    lastOperation.append(`${operator} `);
+    updateOperation(value);
   }
   operatorUsedOnce = true;
+}
+
+function updateOperation(value) {
+  lastOperation.textContent = "";
+  operator = value;
+  lastOperation.append(`${firstValue} `);
+  lastOperation.append(`${operator} `);
 }
 
 function result() {
