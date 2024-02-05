@@ -1,9 +1,9 @@
 const lastOperation = document.querySelector(".last-operation");
 const currentOperation = document.querySelector(".current-operation");
-const buttonLayout = document.querySelector(".buttons");
+const buttonLayout = document.querySelectorAll("button");
 
-let firstValue = 0;
-let secondValue = null;
+let firstValue = "0";
+let secondValue = "";
 let operator = null;
 let operatorUsedOnce = false;
 
@@ -28,8 +28,8 @@ const divide = (firstValue, secondValue) => {
 };
 
 function operate(firstValue, secondValue, operator) {
-  firstValue = parseInt(firstValue);
-  secondValue = parseInt(secondValue);
+  firstValue = Number(firstValue);
+  secondValue = Number(secondValue);
   switch (operator) {
     case "+":
       return sum(firstValue, secondValue);
@@ -56,68 +56,80 @@ function checkOperator(value) {
   return false;
 }
 
-buttonLayout.addEventListener("click", (e) => {
-  let currentValue = e.target.value;
-  if (currentValue === "clear") {
-    clear();
-  } else if (currentValue === "delete") {
-    deleteLastOperand;
-  } else if (currentValue === "result") {
-    if (firstValue != null && secondValue != null && operator != null) {
-      result();
+buttonLayout.forEach((button) =>
+  button.addEventListener("click", (e) => {
+    let currentValue = e.target.value;
+    if (currentValue === "clear") {
+      clear();
+    } else if (currentValue === "delete") {
+      deleteLastOperand;
+    } else if (currentValue === "result") {
+      if (firstValue != null && secondValue != "" && operator != null) {
+        result();
+      }
+    } else if (checkOperator(currentValue)) {
+      handleOperator(currentValue);
+    } else {
+      handleOperand(currentValue);
     }
-  } else if (checkOperator(currentValue)) {
-    handleOperator(currentValue);
-    console.log(currentValue);
-  } else {
-    handleOperand(parseInt(currentValue));
-  }
-});
+  })
+);
 
 function clear() {
-  lastOperation.textContent = "";
-  currentOperation.textContent = "0";
-  firstValue = 0;
-  secondValue = null;
+  firstValue = "0";
+  secondValue = "";
   operator = null;
   operatorUsedOnce = false;
+  lastOperation.textContent = "";
+  currentOperation.textContent = `${firstValue}`;
 }
 
 function handleOperand(value) {
-  if (firstValue === null || firstValue === 0) {
-    currentOperation.textContent = "";
-  }
-  if (firstValue === null || firstValue === 0 || operator === null) {
-    firstValue = value;
+  if (operator === null) {
+    if (firstValue === "0") {
+      firstValue = "";
+    }
+    if (value === ".") {
+      if (!firstValue.includes(".")) {
+        firstValue = firstValue + value;
+      }
+    } else {
+      firstValue = firstValue + value;
+    }
     currentOperation.textContent = `${firstValue}`;
   } else {
-    secondValue = value;
-    lastOperation.append(` ${operator}`);
+    secondValue = secondValue + value;
     currentOperation.textContent = `${secondValue}`;
   }
 }
 
 function handleOperator(value) {
-  lastOperation.textContent = "";
   if (operatorUsedOnce) {
-    result();
+    if (secondValue != "") {
+      result();
+      lastOperation.textContent = "";
+      operator = value;
+      lastOperation.append(`${firstValue} `);
+      lastOperation.append(`${operator} `);
+    }
+  } else {
     lastOperation.textContent = "";
+    operator = value;
+    lastOperation.append(`${firstValue} `);
+    lastOperation.append(`${operator} `);
   }
-  operator = value;
-  lastOperation.append(` ${firstValue}`);
-  currentOperation.textContent = ` ${operator}`;
   operatorUsedOnce = true;
 }
 
 function result() {
+  lastOperation.textContent = `${firstValue} ${operator} ${secondValue} =`;
   firstValue = operate(firstValue, secondValue, operator);
   if (!Number.isInteger(firstValue)) {
     firstValue = firstValue.toFixed(3);
   }
-  lastOperation.append(` ${secondValue} =`);
-  secondValue = null;
+  secondValue = "";
   operator = null;
   operatorUsedOnce = false;
   currentOperation.textContent = "";
-  lastOperation.textContent = `${firstValue}`;
+  currentOperation.textContent = `${firstValue}`;
 }
