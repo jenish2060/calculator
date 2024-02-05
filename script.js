@@ -110,6 +110,9 @@ function handleOperand(value) {
     }
     if (value === ".") {
       if (!firstValue.includes(".")) {
+        if (firstValue == "") {
+          firstValue = "0";
+        }
         firstValue = firstValue + value;
       }
     } else {
@@ -119,6 +122,9 @@ function handleOperand(value) {
   } else {
     if (value === ".") {
       if (!secondValue.includes(".")) {
+        if (secondValue == "") {
+          secondValue = "0";
+        }
         secondValue = secondValue + value;
       }
     } else {
