@@ -159,6 +159,5 @@ function result() {
   secondValue = "";
   operator = null;
   operatorUsedOnce = false;
-  currentOperation.textContent = "";
   currentOperation.textContent = `${firstValue}`;
 }

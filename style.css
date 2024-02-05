@@ -14,7 +14,7 @@ button {
   display: flex;
   flex-direction: column;
   max-width: 350px;
-  max-height: 500px;
+  max-height: auto;
   background-color: #c7c8cc;
   padding: 20px;
 }
@@ -24,6 +24,7 @@ button {
   margin-bottom: 15px;
   text-align: end;
   min-height: 90px;
+  height: 100%;
 }
 
 .last-operation {
@@ -39,6 +40,8 @@ button {
 .last-operation,
 .current-operation {
   margin: 10px 15px;
+  height: 100%;
+  word-wrap: break-word;
 }
 
 .buttons {
